@@ -54,4 +54,13 @@ router.post('/', upload.single('img'), async (req, res) => {
   }
 });
 
+// 삭제기능은 차후 구현
+// router.delete('/:id', async (req, res) => {
+//   try{
+//     const params = {
+//       pwd : req.body.pwd
+//     }
+//   }
+// })
+
 module.exports = router;
