@@ -3,8 +3,12 @@ const Sequelize = require('sequelize');
 module.exports = class Drink extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
+      category: {
+        type: Sequelize.ENUM("커피","티","논커피"),
+        allowNull: false
+      },
       name: {
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING(20),
         allowNull: false
       },
       store: {
@@ -17,6 +21,14 @@ module.exports = class Drink extends Sequelize.Model {
       },
       img: {
         type: Sequelize.STRING, 
+        allowNull: true,
+      },
+      like: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      dislike: {
+        type: Sequelize.INTEGER,
         allowNull: true,
       },
     }, {

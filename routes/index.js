@@ -3,7 +3,6 @@ const logger = require('../lib/logger');
 const drinkRouter = require('./drink');
 const voteRouter = require('./vote');
 
-
 const router = express.Router();
 
 /* GET home page. */
@@ -24,6 +23,5 @@ router.get('/log-test', (req, res, next) => {
 });
 router.use('/drinks', drinkRouter);
 router.use('/votes', voteRouter);
-// router.use('/devices', deviceRouter);
 
 module.exports = router;

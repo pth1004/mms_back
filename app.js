@@ -6,15 +6,17 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const corsConfig = require('./config/corsConfig.json');
 const models = require('./models/index');
-const sequelize = require('sequelize')
 const fs = require('fs');
-const dotenv = require('dotenv');
 const logger = require('./lib/logger');
 
 const indexRouter = require('./routes/index');
 
 const app = express();
 logger.info('app start');
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 models.sequelize.sync().then(() => {
   logger.info('DB connection success');
