@@ -1,5 +1,5 @@
 const { Op } = require('sequelize');
-const { Drink, Vote } = require('../models/index');
+const { Drink } = require('../models/index');
 
 const dao = {
   //음료 검색
