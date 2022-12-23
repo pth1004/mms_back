@@ -20,7 +20,7 @@ const dao = {
     // }
 
     // order by 정렬 조건
-    setQuery.order = [['like', 'ASC']];
+    setQuery.order = [['like', 'DESC']];
 
     return new Promise((resolve, reject) => {
       Drink.findAndCountAll({
