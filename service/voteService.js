@@ -6,22 +6,21 @@ const service = {
     let inserted = null;
     drink = await voteDao.currentValue(params)
 
-    if (params.like) {
+    if (params.like == 1) {
       drink.like += 1
-      console.log(`${params.id}를 추천하였습니다.`)
-    } if(params.dislike) {
-      drink.dislike += 1
-      console.log(`${params.id}를 비추천하였습니다.`)
+      console.log(`${params.id}를 좋아요를 눌렀습니다.`)
+    } if (params.like == 0) {
+      drink.like -= 1
+      console.log(`${params.id}를 좋아요를 취소하였습니다.`)
 
     }
-     try {
+    try {
       const params2 = {
         id: params.id,
-        like: drink.like,
-        dislike: drink.dislike,
+        like: drink.like
       }
 
-      inserted = await voteDao.update(params2); 
+      inserted = await voteDao.update(params2);
       logger.debug(`(voteService.list) ${JSON.stringify(inserted)}`);
 
     } catch (err) {
@@ -30,6 +29,25 @@ const service = {
         reject(err);
       });
     }
+  },
+  //ip등록
+  async registryip(connectip) {
+    let inserted = null;
+
+    try {
+      inserted = await voteDao.insert(connectip);
+      logger.debug(`(voteService.registry) ${JSON.stringify(inserted)}`);
+    } catch (err) {
+      logger.error(`(voteService.registry) ${err.toString()}`);
+      return new Promise((reject) => {
+        reject(err);
+      });
+    }
+    
+    return new Promise((resolve) => {
+      resolve(inserted);
+    });
   }
-}
+
+  }
 module.exports = service;

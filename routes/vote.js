@@ -2,14 +2,22 @@ const express = require('express');
 const router = express.Router();
 const logger = require('../lib/logger');
 const voteService = require('../service/voteService');
+const requestip = require('request-ip')
 
 router.put('/:id', async (req, res) => {
   try {
     const params = {
       id: req.params.id,
       like: req.body.like,
-      dislike: req.body.dislike,
     };
+    const connectip = {
+      ip: requestip.getClientIp(req).toString().replace('::ffff:', ''),
+      drinkId : req.params.id
+    }
+    console.log(requestip.getClientIp(req))
+    const inspection = await voteService.registryip(connectip);
+    logger.info(`(ip.update.params) ${JSON.stringify(inspection)}`);
+
 
     logger.info(`(vote.update.params) ${JSON.stringify(params)}`);
 

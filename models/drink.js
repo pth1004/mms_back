@@ -5,7 +5,7 @@ module.exports = class Drink extends Sequelize.Model {
     return super.init({
       category: {
         type: Sequelize.ENUM("커피","티","논커피"),
-        allowNull: false
+        allowNull: false,
       },
       name: {
         type: Sequelize.STRING(20),
@@ -27,10 +27,6 @@ module.exports = class Drink extends Sequelize.Model {
         type: Sequelize.INTEGER,
         allowNull: true,
       },
-      dislike: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
     }, {
       sequelize,
       underscored: true, // true: underscored, false: camelCase
@@ -41,6 +37,9 @@ module.exports = class Drink extends Sequelize.Model {
       charset: 'utf8mb4',
       collate: 'utf8mb4_general_ci'
     });
+  }
+  static associate(db) {
+    db.Drink.hasMany(db.Ipstore, { foreignKey : 'drinkId', sourceKey :'id'  });
   }
 };
 

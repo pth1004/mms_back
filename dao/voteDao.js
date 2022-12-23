@@ -1,4 +1,4 @@
-const { Drink } = require('../models/index');
+const { Drink, Ipstore} = require('../models/index');
 
 const dao = {
   currentValue(params) {
@@ -29,6 +29,16 @@ const dao = {
       });
     });
   },
+
+  insert(connectip) {
+    return new Promise((resolve, reject) => {
+      Ipstore.create(connectip).then((inserted) => {
+        resolve(inserted);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  }
 }
 
 module.exports = dao;
