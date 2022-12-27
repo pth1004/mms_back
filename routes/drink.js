@@ -32,7 +32,7 @@ router.post('/', upload.single('img'), async (req, res) => {
       name : req.body.name,
       store : req.body.store,
       keyword : req.body.keyword,
-      img: req.file ? req.file.filename : null
+      img: req.file ? req.file.filename : null,
     };
     logger.info(`(drink.post.params) ${JSON.stringify(params)}`);
 
