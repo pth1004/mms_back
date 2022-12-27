@@ -1,11 +1,11 @@
-const { Drink, Ipstore} = require('../models/index');
+const { Ipstore } = require('../models/index');
 
 const dao = {
   currentValue(params) {
     return new Promise((resolve, reject) => {
-      Drink.findOne({
+      Ipstore.findOne({
         where: {
-          id : params.id
+          id: params.id
         }
       }).then((currentValue) => {
         resolve(currentValue);
@@ -17,11 +17,8 @@ const dao = {
 
   update(params) {
     return new Promise((resolve, reject) => {
-      Drink.update(
-        params, {
-          where: { 
-            id: params.id,
-        },},
+      Ipstore.update(
+        params
       ).then(([updated]) => {
         resolve({ updated });
       }).catch((err) => {
@@ -30,15 +27,44 @@ const dao = {
     });
   },
 
-  insert(connectip) {
+  insert(params) {
     return new Promise((resolve, reject) => {
-      Ipstore.create(connectip).then((inserted) => {
+      Ipstore.create(params).then((inserted) => {
         resolve(inserted);
       }).catch((err) => {
         reject(err);
       });
     });
-  }
+  },
+
+  cancle(params) {
+    return new Promise((resolve, reject) => {
+      Ipstore.destroy({
+        where: {
+          id : params.id
+        }
+      }).then((currentValue) => {
+        resolve(currentValue);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
+
+  countlike(params) {
+    return new Promise((resolve, reject) => {
+      Ipstore.count({
+        where: {
+          drinkId: params.drinkId,
+          like : 1
+        }
+      }).then((likecnt) => {
+        resolve(likecnt);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
+  },
 }
 
 module.exports = dao;

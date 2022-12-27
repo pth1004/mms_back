@@ -4,7 +4,7 @@ module.exports = class Drink extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
       category: {
-        type: Sequelize.ENUM("커피","티","논커피"),
+        type: Sequelize.ENUM("Coffee","Tea","Non-Coffee"),
         allowNull: false,
       },
       name: {
@@ -21,10 +21,6 @@ module.exports = class Drink extends Sequelize.Model {
       },
       img: {
         type: Sequelize.STRING, 
-        allowNull: true,
-      },
-      like: {
-        type: Sequelize.INTEGER,
         allowNull: true,
       },
     }, {

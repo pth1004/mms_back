@@ -6,6 +6,10 @@ module.exports = class Ipstore extends Sequelize.Model {
       ip: {
         type: Sequelize.STRING(20),
         allowNull: false
+      },
+      like: {
+        type: Sequelize.INTEGER,
+        allowNull: true
       }
     }, {
       sequelize,
