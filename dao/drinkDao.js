@@ -3,7 +3,8 @@ const { Drink } = require('../models/index');
 
 const dao = {
   //음료 검색
-  selectList (params) {
+  selectList(params) {
+    console.log(params)
     // where 검색 조건
     const setQuery = {};
     if (params.name || params.store || params.keyword) {
@@ -25,6 +26,7 @@ const dao = {
     return new Promise((resolve, reject) => {
       Drink.findAndCountAll({
         ...setQuery,
+        where: {category : params.category } 
       }).then((selectedList) => {
         resolve(selectedList);
       }).catch((err) => {

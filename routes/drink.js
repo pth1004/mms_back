@@ -5,9 +5,10 @@ const drinkService = require('../service/drinkService')
 const upload = require('../lib/uploadphoto')
 
 //음료 검색
-router.get('/', async (req, res) => {
+router.get('/:category', async (req, res) => {
   try {
     const params = {
+      category: req.params.category,
       name: req.query.name,
       store: req.query.store,
       keyword: req.query.keyword
