@@ -31,8 +31,7 @@ router.post('/', upload.single('img'), async (req, res) => {
       name : req.body.name,
       store : req.body.store,
       keyword : req.body.keyword,
-      img: req.file.filename,
-      like: 0
+      img: req.file ? req.file.filename : null
     };
     logger.info(`(drink.post.params) ${JSON.stringify(params)}`);
 
@@ -52,14 +51,5 @@ router.post('/', upload.single('img'), async (req, res) => {
     res.status(500).json({ err: err.toString() });
   }
 });
-
-// 삭제기능은 차후 구현
-// router.delete('/:id', async (req, res) => {
-//   try{
-//     const params = {
-//       pwd : req.body.pwd
-//     }
-//   }
-// })
 
 module.exports = router;
